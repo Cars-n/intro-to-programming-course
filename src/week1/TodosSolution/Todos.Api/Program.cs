@@ -32,3 +32,5 @@ app.UseAuthorization(); // Adds authorization middleware to the request pipeline
 app.MapTodos(); // Maps the routes for the "Todos" feature, allowing the application to handle requests related to todos
 
 app.Run(); // Start application and begin listening for incoming HTTP requests, application is "Blocked" here
+
+public partial class Program { }
