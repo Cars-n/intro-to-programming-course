@@ -4,6 +4,16 @@ using Todos.Api.Todos;
 
 var builder = WebApplication.CreateBuilder(args); // Initializes a new instance of WebApplicationBuilder, which is used to configure the application, services, and middleware
 
+builder.Services.AddCors(pol =>
+{
+    pol.AddDefaultPolicy(c =>
+    {
+        c.AllowAnyHeader();
+        c.AllowAnyMethod();
+        c.AllowAnyOrigin();
+    });
+});
+
 builder.Services.AddAuthorization(); // Adds authorization services to the application
 
 // Retrieves the connection string for the database from the configuration to use for connection
@@ -19,6 +29,8 @@ builder.Services.AddOpenApi(); // Adds OpenAPI (Swagger) services to the applica
 
 // Above this line is configuration for the services inside our application
 var app = builder.Build(); // Builds the application, preparing it to handle HTTP requests
+
+app.UseCors();
 // After this line is configuration for how HTTP requests and responses and handled
 
 // Configure the HTTP request pipeline
