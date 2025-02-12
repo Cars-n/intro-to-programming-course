@@ -1,15 +1,15 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  signal,
+  // signal,
   resource,
 } from '@angular/core';
-import { TodoListItem } from '../models';
-import { DatePipe } from '@angular/common';
+// import { TodoListItem } from '../models';
+import { DatePipe } from '@angular/common'; // Used for formatting dates
 
 @Component({
   selector: 'app-todo-list',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush, // Checking for changes only when input properties change
   imports: [DatePipe],
   template: `
     @if (itemsResource.error()) {
@@ -20,6 +20,7 @@ import { DatePipe } from '@angular/common';
       <p>Loading data...</p>
     } @else {
       @for (item of itemsResource.value(); track item.id) {
+        <!-- By tracking items by their id, only items that have changed will be re-rendered rather than the entire list -->
         <div class="card bg-base-100 w-96 shadow-xl">
           <div class="card-body">
             <h2 class="card-title">{{ item.description }}</h2>
@@ -57,6 +58,8 @@ export class TodoListComponent {
   //       completedOn: '2025-02-11T20:58:47.300Z',
   //     },
   //   ]);
+
+  // Defines a resource that fetches todo items from an endpoint
   itemsResource = resource({
     loader: () => fetch('http://localhost:1337/todos').then((r) => r.json()),
   });

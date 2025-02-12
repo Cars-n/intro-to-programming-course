@@ -1,4 +1,9 @@
 import { http, delay, HttpResponse } from 'msw';
+// msw is used for mocking network requests in web applications. It intercepts HTTP requests and provides predefined responses
+// - `http`: Provides utilities for defining HTTP request handlers.
+// - `delay`: Allows simulating network delay in responses.
+// - `HttpResponse`: Used to construct HTTP responses with specific content and status codes.
+
 const fakeItems = [
   {
     id: '99',

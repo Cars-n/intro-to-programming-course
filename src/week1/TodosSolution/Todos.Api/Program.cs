@@ -4,13 +4,14 @@ using Todos.Api.Todos;
 
 var builder = WebApplication.CreateBuilder(args); // Initializes a new instance of WebApplicationBuilder, which is used to configure the application, services, and middleware
 
+// Configures Cross-Origin Resource Sharing (CORS). Enables applications hosted on different domains to interact with this API
 builder.Services.AddCors(pol =>
 {
     pol.AddDefaultPolicy(c =>
     {
         c.AllowAnyHeader();
-        c.AllowAnyMethod();
-        c.AllowAnyOrigin();
+        c.AllowAnyMethod(); // Allows requests with any HTTP methods (GET, POST, etc.)
+        c.AllowAnyOrigin(); // Allows requests from any origin (domain)
     });
 });
 
@@ -30,7 +31,7 @@ builder.Services.AddOpenApi(); // Adds OpenAPI (Swagger) services to the applica
 // Above this line is configuration for the services inside our application
 var app = builder.Build(); // Builds the application, preparing it to handle HTTP requests
 
-app.UseCors();
+app.UseCors(); // Enables CORS middleware to handle cross-origin requests
 // After this line is configuration for how HTTP requests and responses and handled
 
 // Configure the HTTP request pipeline
