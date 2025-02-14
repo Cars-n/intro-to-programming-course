@@ -8,8 +8,8 @@ public class NewAccounts
     {
         var correctOpeningBalance = 5000M;
         // To create new class do CTRL + . and selecte generate new type. Will create class, add project reference, and add using
-        var myAccount = new Account();
-        var yourAccount = new Account();
+        var myAccount = new Account(Substitute.For<ICalculateBonusesForDepositsOnAccounts>());
+        var yourAccount = new Account(Substitute.For<ICalculateBonusesForDepositsOnAccounts>());
 
         var myBalance = myAccount.GetBalance(); 
         decimal yourBalance = yourAccount.GetBalance(); // Quick hints can generate method since type is specified
