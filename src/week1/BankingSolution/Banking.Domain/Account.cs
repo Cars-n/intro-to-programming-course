@@ -20,17 +20,14 @@ public class Account // Switched from internal to public taking it from accessib
     }
 
     // Commands - telling account to do work
-    public void Deposit(decimal amountToDeposit) // virtual makes method overridable by children classes
+    public void Deposit(AccountTransactionAmount amountToDeposit) // virtual makes method overridable by children classes
     {
-        CheckTransactionAmount(amountToDeposit);
-
         var bonus = _bonusCalculator.CalculateBonusForDeposit(_currentBalance, amountToDeposit);
         _currentBalance += amountToDeposit + bonus;
     }
 
-    public void Withdraw(decimal amountToWithdraw)
+    public void Withdraw(AccountTransactionAmount amountToWithdraw)
     {
-        CheckTransactionAmount(amountToWithdraw);
         if (_currentBalance >= amountToWithdraw)
         {
             _currentBalance -= amountToWithdraw;
