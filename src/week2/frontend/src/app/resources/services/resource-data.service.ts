@@ -1,21 +1,26 @@
-import { HttpClient } from "@angular/common/http"
-import { inject } from "@angular/core"
-import { ResourceListItem, ResourceListItemCreateModel } from "../types";
-import { environment } from "../../../environments/environment";
+import { HttpClient } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { ResourceListItem, ResourceListItemCreateModel } from '../types';
+import { environment } from '../../../environments/environment';
+import { tagMaker } from './tagmaker';
 
 export class ResourceDataService {
-    private readonly URL = environment.apiUrl
+  private readonly URL = environment.apiUrl;
 
-    private client = inject(HttpClient);
+  private client = inject(HttpClient);
 
-    getResource() {
-        return this.client.get<ResourceListItem[]>(this.URL + 'resources');
-    }
+  getResource() {
+    return this.client.get<ResourceListItem[]>(this.URL + 'resources');
+  }
 
-    addResource(item:ResourceListItemCreateModel) {
-
-        // item.tags = string
-        // item.tags = string[]
-        return this.client.post<ResourceListItem>(this.URL + 'resouirces', item)
-    }
+  addResource(item: ResourceListItemCreateModel) {
+    const itemsToSend = {
+      ...item,
+      tags: tagMaker(item.tags),
+    };
+    return this.client.post<ResourceListItem>(
+      this.URL + 'resources',
+      itemsToSend,
+    );
+  }
 }
